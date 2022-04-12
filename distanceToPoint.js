@@ -4,7 +4,7 @@
 * @author Darian Weiss
 * @version 1.0.0
 */
-var ergebnis = ""; //Ergebnis-String, der mit den Entfernungen belegt und im im HTML-File ausgegeben wird.
+var ergebnis = ""; //Ergebnis-String, der mit den Entfernungen belegt und im HTML-File ausgegeben wird.
 var entfernung = new Array(cities.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
 
 /**
