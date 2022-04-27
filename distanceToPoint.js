@@ -73,32 +73,19 @@ function distanceToPoint(punkts){
 
   function calculatePoint(){
     let JSON_input = document.getElementById("textfeld");
-    // testing 
-    console.log(JSON_input);
-
-    // Here I check, whether the input is viable as a JSON/GeoJSON object
-    if(isJsonString(JSON_input.value)){
-
-        // Here I check, whether the GeoJSON is a point, because only than i can calculate properly
-        if(JSON.parse(JSON_input.value).type == "Point"){
-
+    if(isJsonString(JSON_input.value)){          // Fehlerabfrage, ob JSON
+        if(JSON.parse(JSON_input.value).type == "Point"){    // Fehlerabfrage, ob korrektes geojsin "Point" Format
             point = JSON.parse(document.getElementById("textfeld").value);
             console.log(point)
             distanceToPoint(point);
         }
         else{
-
-            // Error!
-            alert("WRONG INPUT! PLEASE TRY AGAIN");
-
+            alert("Fehlerhafte Eingabe"); //Fehlermeldung
         }      
 
     }
     else{
-
-        // Error!
-        alert("WRONG INPUT! PLEASE TRY AGAIN");
-
+        alert("Fehlerhafte Eingabe"); //Fehlermeldung
     }
 }
 
