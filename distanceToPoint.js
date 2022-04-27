@@ -5,7 +5,7 @@
 * @version 1.0.0
 */
 var ergebnis = ""; //Ergebnis-String, der mit den Entfernungen belegt und im HTML-File ausgegeben wird.
-var entfernung = new Array(cities.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
+var entfernung = new Array(pois.features.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
 
  
  document.title = "Abgabe 2 Geosoftware Darian Weiß";
@@ -45,12 +45,13 @@ function distanceToPoint(punkts){
    * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
    * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
    */
-    for(var i=0; i < cities.length; i++){
+    for(var i=0; i < pois.features.length; i++){
 
-      //  var lat2 = cities[i][1]; // In jeder Iteration wird im Array cities eine Stelle weitergegangen und der Wert in der Variable zwischengespeichert
-       // var lon2 = cities[i][0]; // s.o.
-        var lon1 = punkts.coordinates[0];
-        var lat1 = punkts.coordinates[1];
+      var lon1 = punkts.coordinates[0];
+      var lat1 = punkts.coordinates[1]; 
+      var lat2 = pois.features[i].geometry.coordinates[1]; // In jeder Iteration wird im Array cities eine Stelle weitergegangen und der Wert in der Variable zwischengespeichert
+      var lon2 = pois.features[i].geometry.coordinates[0];// s.o.
+        
 
         const R = 6371e3; // in Meter.
         const φ1 = lat1 * Math.PI/180; // φ, λ in radians
@@ -78,11 +79,12 @@ function distanceToPoint(punkts){
 
       ergebnis = ergebnis + entfernung[k] + "<br />"; //Der Ergebnis-String wird in jedem Schritt um einen Wert aus dem geordneten Array entfernung und einen Zeilenumbruch ergänzt.
     }
+    document.getElementById("ergebnis").innerHTML = ergebnis;
   }
 
   function calculatePoint(){
 
-    let JSON_input = document.getElementById("textfield")
+    let JSON_input = document.getElementById("textfeld");
 
     // testing 
     console.log(JSON_input);
@@ -93,7 +95,7 @@ function distanceToPoint(punkts){
         // Here I check, whether the GeoJSON is a point, because only than i can calculate properly
         if(JSON.parse(JSON_input.value).type == "Point"){
 
-            point = JSON.parse(document.getElementById("textfield").value);
+            point = JSON.parse(document.getElementById("textfeld").value);
             console.log(point)
             distanceToPoint(point);
         }
@@ -132,7 +134,3 @@ function isJsonString(str) {
   return true;
 
 }
-
-
-
-distanceToPoint(); //Die obenstehende Methode wird ausgeführt.
