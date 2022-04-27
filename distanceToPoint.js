@@ -23,21 +23,23 @@ function getLocation() {
 
 function showPosition(position) {
   //document.getElementById("textfeld").innerHTML = position.coords.latitude +" "+ position.coords.longitude;
-  document.getElementById("textfeld").innerHTML = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
+  let ausgabe = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
+  document.getElementById("textfeld").innerHTML = ausgabe;
+ // document.getElementById("textfeld").innerHTML = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
 }
 
 function schreibLocation() {
-  document.getElementById("textfeld").innerHTML = document.getElementById("upload");
+  //document.getElementById("textfeld").innerHTML = document.getElementById("upload");
   //document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
  // document.getElementById("textfeld").innerHTML = "test"; 
 }
 /**
  *   Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
  */
-function distanceToPoint(){
+function distanceToPoint(punkts){
 
-  let lat1 = point[1]; //Initialisierung des Latitude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
-  let lon1 = point[0]; //Initialisierung des Longditude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
+  //let lat1 = position.coords.longitude; //Initialisierung des Latitude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
+ // let lon1 = position.coords.latitude; //Initialisierung des Longditude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
 
   /**
    * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
@@ -45,8 +47,10 @@ function distanceToPoint(){
    */
     for(var i=0; i < cities.length; i++){
 
-        var lat2 = cities[i][1]; // In jeder Iteration wird im Array cities eine Stelle weitergegangen und der Wert in der Variable zwischengespeichert
-        var lon2 = cities[i][0]; // s.o.
+      //  var lat2 = cities[i][1]; // In jeder Iteration wird im Array cities eine Stelle weitergegangen und der Wert in der Variable zwischengespeichert
+       // var lon2 = cities[i][0]; // s.o.
+        var lon1 = punkts.coordinates[0];
+        var lat1 = punkts.coordinates[1];
 
         const R = 6371e3; // in Meter.
         const φ1 = lat1 * Math.PI/180; // φ, λ in radians
@@ -75,5 +79,60 @@ function distanceToPoint(){
       ergebnis = ergebnis + entfernung[k] + "<br />"; //Der Ergebnis-String wird in jedem Schritt um einen Wert aus dem geordneten Array entfernung und einen Zeilenumbruch ergänzt.
     }
   }
+
+  function calculatePoint(){
+
+    let JSON_input = document.getElementById("textfield")
+
+    // testing 
+    console.log(JSON_input);
+
+    // Here I check, whether the input is viable as a JSON/GeoJSON object
+    if(isJsonString(JSON_input.value)){
+
+        // Here I check, whether the GeoJSON is a point, because only than i can calculate properly
+        if(JSON.parse(JSON_input.value).type == "Point"){
+
+            point = JSON.parse(document.getElementById("textfield").value);
+            console.log(point)
+            distanceToPoint(point);
+        }
+        else{
+
+            // Error!
+            alert("WRONG INPUT! PLEASE TRY AGAIN");
+
+        }      
+
+    }
+    else{
+
+        // Error!
+        alert("WRONG INPUT! PLEASE TRY AGAIN");
+
+    }
+
+
+}
+
+function isJsonString(str) {
+
+  try{
+
+  JSON.parse(str);
+
+  } 
+
+  catch (e){
+
+  return false;
+
+  }
+
+  return true;
+
+}
+
+
 
 distanceToPoint(); //Die obenstehende Methode wird ausgeführt.
