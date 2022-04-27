@@ -17,8 +17,7 @@ function getLocation() {
   }
 }
  /**
-   * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
-   * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
+   * schreibt die koordinaten ins Textfeld
    */
 function showPosition(position) {
   //document.getElementById("textfeld").innerHTML = position.coords.latitude +" "+ position.coords.longitude;
@@ -27,13 +26,11 @@ function showPosition(position) {
   document.getElementById("textfeld").innerHTML = ausgabe;
 }
 
- /**
-   * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
-   * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
-   */
-function schreibLocation() {
-  document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
-}
+/**
+ * schreibt die Location aus dem hochgeladenen Dokument in das Textfeld (noch nicht funktionstüchtig)
+ * @returns Koordinaten im json Format
+ */
+let schreibLocation = () => document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"))
 
 /**
  * Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
@@ -41,10 +38,6 @@ function schreibLocation() {
  */
 function distanceToPoint(punkts){
   var entfernung = new Array(pois.features.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
-  /**
-   * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
-   * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
-   */
     for(var i=0; i < pois.features.length; i++){
 
       var lon1 = punkts.coordinates[0];  //let lat1 = position.coords.longitude; //Initialisierung des Latitude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
