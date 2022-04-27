@@ -12,8 +12,6 @@
     <script src="pois.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Entfernungen vom Punkt</title>
-
-
 </head>
 
 <body>
@@ -22,7 +20,6 @@
     <p id="eins">Hier sind die Distanzen zum Ausgangspunkt (nach aufsteigender Reihenfolge sortiert) aufgelistet:</p>
     <p id= "ergebnis"> </p>
 </div>
-
 
 <div id="uploadfeld">
     <h2>Distanzberechnung mit eigenem Punkt</h2>
@@ -40,13 +37,12 @@
     <p id="demo"></p>
 </div>
 
-<div>
+<div id="texte">
   <textarea id="textfeld" type = "text" name="text" cols="60" rows="5" placeholder="Koordinaten im .geojson Format" ></textarea>
   <br />
   <p id="erklaerung">Übergangslösung: Punkt im geojson-Format selbst ins Textfeld eintragen :)</p>
   <br />
   <button onclick="calculatePoint()">Distanzen berechnen</button>
-
 </div>
 
 </body>
