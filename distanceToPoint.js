@@ -1,8 +1,8 @@
 "use strict"
 /**
-* Geosoftware SS2022 Abgabe 1
+* Geosoftware SS2022 Abgabe 2
 * @author Darian Weiss
-* @version 1.0.0
+* @version 1.1.0
 */ 
  document.title = "Abgabe 2 Geosoftware Darian Weiß";
  alert(document.title);
@@ -16,20 +16,28 @@ function getLocation() {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
-
+ /**
+   * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
+   * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
+   */
 function showPosition(position) {
   //document.getElementById("textfeld").innerHTML = position.coords.latitude +" "+ position.coords.longitude;
   // document.getElementById("textfeld").innerHTML = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
   let ausgabe = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
   document.getElementById("textfeld").innerHTML = ausgabe;
-
 }
 
+ /**
+   * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
+   * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
+   */
 function schreibLocation() {
   document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
 }
+
 /**
- *   Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
+ * Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
+ * @param punkts punkt im geojson Format
  */
 function distanceToPoint(punkts){
   var entfernung = new Array(pois.features.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
@@ -71,6 +79,9 @@ function distanceToPoint(punkts){
     document.getElementById("ergebnis").innerHTML = ergebnis;
   }
 
+ /**
+   * Berechnet den Punkt in einer verarbeitbaren Form.
+   */
   function calculatePoint(){
     let JSON_input = document.getElementById("textfeld");
     if(isJsonString(JSON_input.value)){          // Fehlerabfrage, ob JSON
@@ -89,6 +100,12 @@ function distanceToPoint(punkts){
     }
 }
 
+ /**
+   * Prueft ob uebergebenes Objekt ein JSON-String ist
+   * @param str zu pruefendes Objekt
+   * @return true : uebergebenes Objekt ist ein JSON-String
+   * @return false : uebergebenes Objekt ist kein JSON-String
+   */
 function isJsonString(str) {
   try{
   JSON.parse(str);
