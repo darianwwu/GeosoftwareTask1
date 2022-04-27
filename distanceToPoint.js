@@ -3,10 +3,7 @@
 * Geosoftware SS2022 Abgabe 1
 * @author Darian Weiss
 * @version 1.0.0
-*/
-
-
- 
+*/ 
  document.title = "Abgabe 2 Geosoftware Darian Weiß";
  alert(document.title);
 
@@ -22,32 +19,28 @@ function getLocation() {
 
 function showPosition(position) {
   //document.getElementById("textfeld").innerHTML = position.coords.latitude +" "+ position.coords.longitude;
+  // document.getElementById("textfeld").innerHTML = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
   let ausgabe = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
   document.getElementById("textfeld").innerHTML = ausgabe;
- // document.getElementById("textfeld").innerHTML = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
+
 }
 
 function schreibLocation() {
-  //document.getElementById("textfeld").innerHTML = document.getElementById("upload");
   document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
- // document.getElementById("textfeld").innerHTML = "test"; 
 }
 /**
  *   Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
  */
 function distanceToPoint(punkts){
   var entfernung = new Array(pois.features.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
-  //let lat1 = position.coords.longitude; //Initialisierung des Latitude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
- // let lon1 = position.coords.latitude; //Initialisierung des Longditude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
-
   /**
    * Berechnet die Entfernung zweier Punkte anhand ihrer lat/lon Koordinaten
    * Quelle: https://www.movable-type.co.uk/scripts/latlong.html 
    */
     for(var i=0; i < pois.features.length; i++){
 
-      var lon1 = punkts.coordinates[0];
-      var lat1 = punkts.coordinates[1]; 
+      var lon1 = punkts.coordinates[0];  //let lat1 = position.coords.longitude; //Initialisierung des Latitude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
+      var lat1 = punkts.coordinates[1];  // let lon1 = position.coords.latitude; //Initialisierung des Longditude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
       var lat2 = pois.features[i].geometry.coordinates[1]; // In jeder Iteration wird im Array cities eine Stelle weitergegangen und der Wert in der Variable zwischengespeichert
       var lon2 = pois.features[i].geometry.coordinates[0];// s.o.
         
@@ -77,15 +70,9 @@ function distanceToPoint(punkts){
     }
     document.getElementById("ergebnis").innerHTML = ergebnis;
   }
-   //
-      // Einfache Sortierfunktion für Arrays, sortiert das Array entfernung in aufsteigender Reihenfolge.
-      // Quelle: W3S Schools https://www.w3schools.com/js/js_array_sort.asp
-     //
 
   function calculatePoint(){
-
     let JSON_input = document.getElementById("textfeld");
-
     // testing 
     console.log(JSON_input);
 
@@ -113,24 +100,14 @@ function distanceToPoint(punkts){
         alert("WRONG INPUT! PLEASE TRY AGAIN");
 
     }
-
-
 }
 
 function isJsonString(str) {
-
   try{
-
   JSON.parse(str);
-
   } 
-
   catch (e){
-
   return false;
-
   }
-
   return true;
-
 }
