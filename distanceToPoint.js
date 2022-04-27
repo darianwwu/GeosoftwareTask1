@@ -4,8 +4,7 @@
 * @author Darian Weiss
 * @version 1.0.0
 */
-var ergebnis = ""; //Ergebnis-String, der mit den Entfernungen belegt und im HTML-File ausgegeben wird.
-var entfernung = new Array(pois.features.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
+
 
  
  document.title = "Abgabe 2 Geosoftware Darian Weiß";
@@ -30,14 +29,14 @@ function showPosition(position) {
 
 function schreibLocation() {
   //document.getElementById("textfeld").innerHTML = document.getElementById("upload");
-  //document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
+  document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
  // document.getElementById("textfeld").innerHTML = "test"; 
 }
 /**
  *   Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
  */
 function distanceToPoint(punkts){
-
+  var entfernung = new Array(pois.features.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
   //let lat1 = position.coords.longitude; //Initialisierung des Latitude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
  // let lon1 = position.coords.latitude; //Initialisierung des Longditude-Wertes aus point.js zur Verwendung im Distanzberechnungs-Algorithmus.
 
@@ -67,20 +66,21 @@ function distanceToPoint(punkts){
         const d = R * c; // in Meter.
         
       entfernung[i] = d; // Das Array entfernung wird mit dem berechneten Wert aus dieser Iteraion an entsprechender Stelle gefüllt.
-
     }
-    /**
-     *  Einfache Sortierfunktion für Arrays, sortiert das Array entfernung in aufsteigender Reihenfolge.
-     *  Quelle: W3S Schools https://www.w3schools.com/js/js_array_sort.asp
-     */
-    entfernung.sort(function(a, b){return a - b});
-
+    entfernung.sort(function(a, b){
+      return a - b
+    })
+    var ergebnis = ""; //Ergebnis-String, der mit den Entfernungen belegt und im HTML-File ausgegeben wird.
     for(var k=0; k<entfernung.length; k++){
 
       ergebnis = ergebnis + entfernung[k] + "<br />"; //Der Ergebnis-String wird in jedem Schritt um einen Wert aus dem geordneten Array entfernung und einen Zeilenumbruch ergänzt.
     }
     document.getElementById("ergebnis").innerHTML = ergebnis;
   }
+   //
+      // Einfache Sortierfunktion für Arrays, sortiert das Array entfernung in aufsteigender Reihenfolge.
+      // Quelle: W3S Schools https://www.w3schools.com/js/js_array_sort.asp
+     //
 
   function calculatePoint(){
 

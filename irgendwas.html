@@ -17,11 +17,10 @@
 </head>
 
 <body>
- <div id="distances" style="display:none">
+ <div id="distances">
     <h1>Distanzberechnung</h1>
     <p id="eins">Hier sind die Distanzen zum Ausgangspunkt (nach aufsteigender Reihenfolge sortiert) aufgelistet:</p>
     <p id= "ergebnis"> </p>
-    <script></script>
 </div>
 
 
@@ -43,6 +42,8 @@
 
 <div>
   <textarea id="textfeld" type = "text" name="text" cols="60" rows="5" placeholder="Koordinaten im .geojson Format" ></textarea>
+  <br />
+  <p id="erklaerung">Übergangslösung: Punkt im geojson-Format selbst ins Textfeld eintragen :)</p>
   <br />
   <button onclick="calculatePoint()">Distanzen berechnen</button>
 
