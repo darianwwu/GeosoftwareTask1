@@ -64,7 +64,9 @@ function distanceToPoint(punkts){
                   Math.sin(Δλ/2) * Math.sin(Δλ/2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         
-        const d = R * c; // in Meter.
+       const d = R * c; // in Meter.
+      
+        
         
       entfernung[i] = d; // Das Array entfernung wird mit dem berechneten Wert aus dieser Iteraion an entsprechender Stelle gefüllt.
     }
@@ -82,12 +84,11 @@ function distanceToPoint(punkts){
  /**
    * Berechnet den Punkt in einer verarbeitbaren Form.
    */
-  function calculatePoint(){
+  function berechnungDurchfuehren(){
     let JSON_input = document.getElementById("textfeld");
     if(isJsonString(JSON_input.value)){          // Fehlerabfrage, ob JSON
         if(JSON.parse(JSON_input.value).type == "Point"){    // Fehlerabfrage, ob korrektes geojsin "Point" Format
             point = JSON.parse(document.getElementById("textfeld").value);
-            console.log(point)
             distanceToPoint(point);
         }
         else{
