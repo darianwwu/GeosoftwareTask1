@@ -7,6 +7,30 @@
 var ergebnis = ""; //Ergebnis-String, der mit den Entfernungen belegt und im HTML-File ausgegeben wird.
 var entfernung = new Array(cities.length); //Zwischenspeicherungs-Array, das die Entfernungen speichert und später sortiert wird.
 
+ 
+ document.title = "Abgabe 2 Geosoftware Darian Weiß";
+ alert(document.title);
+
+var x = document.getElementById("demo");
+    
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  //document.getElementById("textfeld").innerHTML = position.coords.latitude +" "+ position.coords.longitude;
+  document.getElementById("textfeld").innerHTML = JSON.stringify({type: "Point", coordinates: [position.coords.longitude, position.coords.latitude]});
+}
+
+function schreibLocation() {
+  document.getElementById("textfeld").innerHTML = document.getElementById("upload");
+  //document.getElementById("textfeld").innerHTML = JSON.parse(document.getElementById("upload"));
+ // document.getElementById("textfeld").innerHTML = "test"; 
+}
 /**
  *   Berechnet die Distanz zu den Punkten aus cities.js in Bezug zu dem Punkt aus point.js
  */
@@ -51,4 +75,5 @@ function distanceToPoint(){
       ergebnis = ergebnis + entfernung[k] + "<br />"; //Der Ergebnis-String wird in jedem Schritt um einen Wert aus dem geordneten Array entfernung und einen Zeilenumbruch ergänzt.
     }
   }
+
 distanceToPoint(); //Die obenstehende Methode wird ausgeführt.

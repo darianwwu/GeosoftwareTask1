@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
     <meta name="author" content="Darian Weiss"/>
+    <meta name="description" content="Diese Website berechnet Entfernungen."/>
     <script src="cities.js"></script>
     <script src="point.js"></script>
     <script src="distanceToPoint.js"></script>
@@ -15,9 +16,32 @@
 </head>
 
 <body>
+ <div id="distances" style="display:none">
     <h1>Distanzberechnung</h1>
     <p id="eins">Hier sind die Distanzen zum Ausgangspunkt (nach aufsteigender Reihenfolge sortiert) aufgelistet:</p>
     <p id= "ergebnis"> </p>
     <script>document.getElementById("ergebnis").innerHTML = ergebnis</script>
+</div>
+
+
+<div id="uploadfeld">
+    <h2>Distanzberechnung mit eigenem Punkt</h2>
+
+    <h3>Hier Punkt im .geojson Format hochladen</h3>
+
+    <input type="file" id="upload">
+
+    <button onclick="schreibLocation()">hochgeladenes geojson ins Textfeld laden (funktioniert noch nicht)</button>
+  
+    <h3>alternativ hier klicken um die aktuelle Position automatisch auszuwählen:</h3>
+
+    <button onclick="getLocation()">Aktuelle Position</button>
+
+    <p id="demo"></p>
+</div>
+
+<div>
+  <textarea id="textfeld" type = "text" name="text" cols="60" rows="5" placeholder="Koordinaten im .geojson Format" ></textarea>
+</div>
 
 </body>
